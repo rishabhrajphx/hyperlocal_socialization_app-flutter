@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class EventCreationScreen extends StatelessWidget {
-  const EventCreationScreen({Key? key}) : super(key: key);
+class VenueListScreen extends StatelessWidget {
+  const VenueListScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
