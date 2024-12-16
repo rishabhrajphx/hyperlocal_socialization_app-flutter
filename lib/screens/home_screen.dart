@@ -87,28 +87,51 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[50],
       appBar: AppBar(
-        title: const Text('Local Events'),
+        title: const Text(
+          'Events',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.location_on),
+            icon: const Icon(Icons.location_on, color: Colors.black),
             onPressed: () => _showLocationPicker(context),
           ),
         ],
       ),
-      body: Column(
-        children: [
-          // TODO: Add location indicator banner
-          // - Show current selected location
-          // - Add distance radius selector
-          // - Show number of events in area
-          
-          Expanded(
-            child: ListView.builder(
-              itemCount: dummyEvents.length,
-              itemBuilder: (context, index) {
-                return EventCard(event: dummyEvents[index]);
-              },
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Happening Near You',
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'New York, NY',
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: Colors.grey[600],
+                        ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => EventCard(event: dummyEvents[index]),
+                childCount: dummyEvents.length,
+              ),
             ),
           ),
         ],
@@ -117,6 +140,12 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+          // TODO: Add location indicator banner
+          // - Show current selected location
+          // - Add distance radius selector
+          // - Show number of events in area
+
+          
 /* Future Improvements:
  * 1. Location Services:
  *    - Implement geofencing for local event notifications
