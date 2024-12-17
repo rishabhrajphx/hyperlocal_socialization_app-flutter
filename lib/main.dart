@@ -7,6 +7,7 @@ import 'screens/venue_list_screen.dart';
 import 'screens/profile_screen.dart';
 import 'providers/event_provider.dart';
 import 'providers/venue_provider.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
