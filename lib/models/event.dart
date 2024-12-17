@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Event {
   final String id;
   final String title;
@@ -22,6 +24,36 @@ class Event {
     required this.maxAttendees,
     required this.attendeeIds,
   });
+
+  factory Event.fromFirestore(DocumentSnapshot doc) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    return Event(
+      id: doc.id,
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      dateTime: (data['dateTime'] as Timestamp).toDate(),
+      location: data['location'] ?? '',
+      organizerId: data['organizerId'] ?? '',
+      venueId: data['venueId'],
+      price: (data['price'] ?? 0).toDouble(),
+      maxAttendees: data['maxAttendees'] ?? 0,
+      attendeeIds: List<String>.from(data['attendeeIds'] ?? []),
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'description': description,
+      'dateTime': Timestamp.fromDate(dateTime),
+      'location': location,
+      'organizerId': organizerId,
+      'venueId': venueId,
+      'price': price,
+      'maxAttendees': maxAttendees,
+      'attendeeIds': attendeeIds,
+    };
+  }
 }
 
 // Dummy data for testing
