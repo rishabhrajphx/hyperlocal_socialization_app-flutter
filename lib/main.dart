@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'screens/home_screen.dart';
 import 'screens/event_creation_screen.dart';
 import 'screens/venue_list_screen.dart';
 import 'screens/profile_screen.dart';
+import 'providers/event_provider.dart';
+import 'providers/venue_provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const LocalEventsApp());
 }
 
@@ -13,30 +19,36 @@ class LocalEventsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Local Events',
-      theme: ThemeData(
-        primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.grey[50],
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          elevation: 0,
-          centerTitle: true,
-        ),
-        cardTheme: CardTheme(
-          elevation: 0,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-            side: BorderSide(color: Colors.grey.withOpacity(0.2)),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => EventProvider()),
+        ChangeNotifierProvider(create: (_) => VenueProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Local Events',
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          scaffoldBackgroundColor: Colors.grey[50],
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+            elevation: 0,
+            centerTitle: true,
+          ),
+          cardTheme: CardTheme(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+              side: BorderSide(color: Colors.grey.withOpacity(0.2)),
+            ),
+          ),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            selectedItemColor: Colors.black,
+            unselectedItemColor: Colors.grey,
           ),
         ),
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-        ),
+        home: const MainNavigationScreen(),
       ),
-      home: const MainNavigationScreen(),
     );
   }
 }
