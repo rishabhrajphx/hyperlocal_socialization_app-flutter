@@ -1,24 +1,47 @@
-import 'package:your_app/models/venue.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hyper_local_socialization_app/data/models/venue.dart';
 
 class VenueRepository {
-  // Fetch a list of venues
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final String _collection = 'venues';
+
   Future<List<Venue>> fetchVenues() async {
-    // Implementation to fetch venues from a data source
-    return [];
+    try {
+      final QuerySnapshot snapshot = await _firestore.collection(_collection).get();
+      return snapshot.docs.map((doc) => Venue.fromFirestore(doc)).toList();
+    } catch (e) {
+      print('Error fetching venues: $e');
+      return [];
+    }
   }
 
-  // Add a new venue
   Future<void> addVenue(Venue venue) async {
-    // Implementation to add a venue to a data source
+    try {
+      await _firestore.collection(_collection).add(venue.toMap());
+    } catch (e) {
+      print('Error adding venue: $e');
+      throw Exception('Failed to add venue');
+    }
   }
 
-  // Update an existing venue
   Future<void> updateVenue(Venue venue) async {
-    // Implementation to update a venue in a data source
+    try {
+      await _firestore
+          .collection(_collection)
+          .doc(venue.id)
+          .update(venue.toMap());
+    } catch (e) {
+      print('Error updating venue: $e');
+      throw Exception('Failed to update venue');
+    }
   }
 
-  // Delete a venue
   Future<void> deleteVenue(String venueId) async {
-    // Implementation to delete a venue from a data source
+    try {
+      await _firestore.collection(_collection).doc(venueId).delete();
+    } catch (e) {
+      print('Error deleting venue: $e');
+      throw Exception('Failed to delete venue');
+    }
   }
 }

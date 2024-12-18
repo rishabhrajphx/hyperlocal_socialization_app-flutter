@@ -9,9 +9,12 @@ import 'config/theme.dart';
 // Providers
 import 'presentation/providers/event_provider.dart';
 import 'presentation/providers/venue_provider.dart';
+import 'presentation/providers/auth_provider.dart';
 
 // Repositories
 import 'data/repositories/user_repository.dart';
+import 'data/repositories/event_repository.dart';
+import 'data/repositories/venue_repository.dart';
 
 // Screens
 import 'presentation/screens/home/home_screen.dart';

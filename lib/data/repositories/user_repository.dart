@@ -180,6 +180,27 @@ class UserRepository {
           return requests;
         });
   }
+
+  // Fetch current user
+  Future<User?> getCurrentUser() async {
+    // Implementation to fetch current user from Firebase
+    return null;
+  }
+
+  // Sign in user
+  Future<void> signIn(String email, String password) async {
+    // Implementation to sign in user
+  }
+
+  // Sign out user
+  Future<void> signOut() async {
+    // Implementation to sign out user
+  }
+
+  // Update user profile
+  Future<void> updateProfile(User user) async {
+    // Implementation to update user profile
+  }
 }
 
 class FriendRequest {
