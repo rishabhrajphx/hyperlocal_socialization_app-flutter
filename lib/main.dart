@@ -7,11 +7,13 @@ import 'screens/venue_list_screen.dart';
 import 'screens/profile_screen.dart';
 import 'providers/event_provider.dart';
 import 'providers/venue_provider.dart';
-//import 'firebase_options.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const LocalEventsApp());
 }
 
