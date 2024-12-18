@@ -21,6 +21,8 @@ dependencies:
   firebase_auth: ^4.17.0  # Add this if you need authentication
   firebase_storage: ^11.6.0  # Add this if you need storage
   google_maps_flutter: ^2.5.3
+  google_maps_webservice: ^[version]
+  location: ^[version]
 
 dev_dependencies:
   flutter_test:
