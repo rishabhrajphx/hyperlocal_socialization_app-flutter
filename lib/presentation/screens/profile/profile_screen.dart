@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
     };
 
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: const Color.fromARGB(255, 66, 66, 66),
       appBar: AppBar(
         title: const Text(
           'Profile',

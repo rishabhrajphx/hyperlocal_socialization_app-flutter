@@ -24,7 +24,7 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: const Color.fromARGB(255, 74, 74, 74),
       appBar: AppBar(
         title: const Text(
           'Create Event',
@@ -33,7 +33,7 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
             fontWeight: FontWeight.w600,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromARGB(255, 120, 120, 120),
         elevation: 0,
       ),
       body: Form(
@@ -60,7 +60,7 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
                 ),
                 floatingLabelStyle: const TextStyle(color: Colors.black),
                 filled: true,
-                fillColor: Colors.grey.shade50,
+                fillColor: const Color.fromARGB(255, 114, 113, 113),
               ),
               style: const TextStyle(fontSize: 16),
               validator: (value) {
@@ -90,7 +90,7 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
                 ),
                 floatingLabelStyle: const TextStyle(color: Colors.black),
                 filled: true,
-                fillColor: Colors.grey.shade50,
+                fillColor: const Color.fromARGB(255, 114, 114, 114),
               ),
               maxLines: 4,
               style: const TextStyle(fontSize: 16),
@@ -109,11 +109,11 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
                 hintText: 'Where is your event happening?',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: const Color.fromARGB(255, 119, 118, 118)),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Colors.grey.shade200),
+                  borderSide: BorderSide(color: const Color.fromARGB(255, 109, 109, 109)),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -121,7 +121,7 @@ class _EventCreationScreenState extends State<EventCreationScreen> {
                 ),
                 floatingLabelStyle: const TextStyle(color: Colors.black),
                 filled: true,
-                fillColor: Colors.grey.shade50,
+                fillColor: const Color.fromARGB(255, 95, 95, 95),
                 suffixIcon: Icon(Icons.location_on, color: Colors.grey.shade700),
               ),
               style: const TextStyle(fontSize: 16),
