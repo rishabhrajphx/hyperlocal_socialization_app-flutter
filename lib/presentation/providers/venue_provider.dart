@@ -1,19 +1,24 @@
 import 'package:flutter/foundation.dart';
-import 'package:hyper_local_socialization_app/data/services/firebase_service.dart';
+import 'package:hyper_local_socialization_app/data/repositories/venue_repository.dart';
 import 'package:hyper_local_socialization_app/data/models/venue.dart';
 
 class VenueProvider with ChangeNotifier {
-  final FirebaseService _firebaseService = FirebaseService();
+  final VenueRepository venueRepository;
   List<Venue> _venues = [];
+
+  VenueProvider({required this.venueRepository});
 
   List<Venue> get venues => _venues;
 
-  Stream<List<Venue>> getVenues() {
-    return _firebaseService.getVenues();
+  Future<List<Venue>> getVenues() async {
+    _venues = await venueRepository.fetchVenues();
+    notifyListeners();
+    return _venues;
   }
 
   Future<void> createVenue(Venue venue) async {
-    await _firebaseService.createVenue(venue.toMap());
+    await venueRepository.addVenue(venue);
+    await getVenues(); // Refresh the venues list
     notifyListeners();
   }
 } 
