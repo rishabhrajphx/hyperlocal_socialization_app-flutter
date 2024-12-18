@@ -18,9 +18,9 @@ import 'data/repositories/event_repository.dart';
 import 'data/repositories/venue_repository.dart';
 
 // Screens
-import 'presentation/screens/events/home_screen.dart';
+import 'presentation/screens/home/home_screen.dart';
 import 'presentation/screens/events/event_creation_screen.dart';
-import 'presentation/screens/venues/venue_list_screen.dart';
+import 'presentation/screens/venue/venue_list_screen.dart';
 import 'presentation/screens/profile/profile_screen.dart';
 
 void main() async {
