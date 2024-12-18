@@ -6,9 +6,12 @@ class MapsService {
   final GoogleMapsPlaces _places;
   final loc.Location _location;
   
-  MapsService({GoogleMapsPlaces? places, loc.Location? location})
-      : _places = places ?? GoogleMapsPlaces(apiKey: 'YOUR_GOOGLE_MAPS_API_KEY'),
-        _location = location ?? loc.Location();
+  MapsService({
+    GoogleMapsPlaces? places, 
+    loc.Location? location,
+    required String apiKey,
+  }) : _places = places ?? GoogleMapsPlaces(apiKey: apiKey),
+       _location = location ?? loc.Location();
   
   Future<List<PlacePrediction>> searchLocation(String query) async {
     try {
