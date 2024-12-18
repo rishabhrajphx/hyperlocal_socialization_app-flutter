@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class AppTheme {
   // Define custom colors
@@ -69,12 +68,10 @@ class AppTheme {
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
-        background: backgroundColor,
         error: Colors.red,
         onPrimary: isDark ? darkSurfaceColor : surfaceColor,
         onSecondary: isDark ? darkSurfaceColor : surfaceColor,
         onSurface: primaryColor,
-        onBackground: primaryColor,
         onError: surfaceColor,
       ),
       
@@ -158,8 +155,8 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: surfaceColor,
         indicatorColor: primaryColor.withOpacity(0.1),
-        labelTextStyle: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return TextStyle(
               color: primaryColor,
               fontSize: 12,
@@ -172,8 +169,8 @@ class AppTheme {
             fontWeight: FontWeight.w500,
           );
         }),
-        iconTheme: MaterialStateProperty.resolveWith((states) {
-          if (states.contains(MaterialState.selected)) {
+        iconTheme: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.selected)) {
             return IconThemeData(
               color: primaryColor,
               size: 24,
