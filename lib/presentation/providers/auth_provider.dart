@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:your_app/data/repositories/user_repository.dart';
-import 'package:your_app/models/user.dart';
+import 'package:hyper_local_socialization_app/data/repositories/user_repository.dart';
+import 'package:hyper_local_socialization_app/data/models/user.dart';
 
 class AuthProvider with ChangeNotifier {
   final UserRepository userRepository;
