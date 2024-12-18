@@ -1,0 +1,48 @@
+Code structure: Feel free to make changes.
+
+lib/  
+├── config/  
+│   ├── app_config.dart        # App-wide configuration  
+│   ├── theme.dart            # Cxustom theme data  
+│   └── routes.dart           # Named routes  
+├── core/  
+│   ├── constants/  
+│   │   ├── api_constants.dart  
+│   │   └── app_constants.dart  
+│   ├── errors/  
+│   │   └── exceptions.dart  
+│   └── utils/  
+│       ├── date_formatter.dart  
+│       └── validators.dart  
+├── data/  
+│   ├── repositories/  
+│   │   ├── event_repository.dart  
+│   │   ├── user_repository.dart  
+│   │   ├── venue_repository.dart  
+│   │   ├── payment_repository.dart  
+│   │   └── location_repository.dart  
+│   ├── models/
+│   │   ├── event.dart
+│   │   ├── user.dart
+│   │   ├── venue.dart
+│   │   └── location.dart
+│   └── services/
+│       ├── firebase_service.dart
+│       ├── maps_service.dart
+│       ├── payment_service.dart
+│       └── notification_service.dart
+├── presentation/
+│   ├── screens/
+│   │   ├── events/
+│   │   ├── venues/
+│   │   ├── profile/
+│   │   └── auth/
+│   ├── widgets/
+│   │   ├── common/
+│   │   ├── events/
+│   │   └── venues/
+│   └── providers/
+│       ├── auth_provider.dart
+│       ├── event_provider.dart
+│       └── location_provider.dart
+└── main.dart
