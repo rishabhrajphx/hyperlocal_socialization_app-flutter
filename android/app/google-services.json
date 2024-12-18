@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "644424752010",
+    "project_id": "hyper-local-socialization",
+    "storage_bucket": "hyper-local-socialization.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644424752010:android:37e73e2e8d64f2e9930673",
+        "android_client_info": {
+          "package_name": "com.hyperlocal.social"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC68Y1L8aNe-bP0xzGQizOoNWNh3SP1iQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
