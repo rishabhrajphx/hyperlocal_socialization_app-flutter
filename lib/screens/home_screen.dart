@@ -157,10 +157,10 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-          // TODO: Add location indicator banner
-          // - Show current selected location
-          // - Add distance radius selector
-          // - Show number of events in area
+// TODO: Add location indicator banner
+// - Show current selected location
+// - Add distance radius selector
+// - Show number of events in area
 
           
 /* Future Improvements:
