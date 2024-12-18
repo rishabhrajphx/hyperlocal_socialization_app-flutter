@@ -9,50 +9,103 @@ class AppTheme {
   static const Color surfaceColor = Color(0xFFFFFFFF);
   static const Color borderColor = Color(0xFFE5E5EA);
   
+  // Dark theme colors
+  static const Color darkPrimaryColor = Color(0xFFFFFFFF);
+  static const Color darkSecondaryColor = Color(0xFFE5E5EA);
+  static const Color darkBackgroundColor = Color(0xFF1C1C1E);
+  static const Color darkSurfaceColor = Color(0xFF2C2C2E);
+  static const Color darkBorderColor = Color(0xFF38383A);
+
+  // Shared text styles
+  static const TextStyle _baseHeadline = TextStyle(
+    fontWeight: FontWeight.bold,
+    letterSpacing: 0.25,
+  );
+
+  static const TextStyle _baseBody = TextStyle(
+    letterSpacing: 0.5,
+  );
+
+  // Light theme
   static ThemeData get light {
+    return _baseTheme(
+      brightness: Brightness.light,
+      primaryColor: primaryColor,
+      secondaryColor: secondaryColor,
+      backgroundColor: backgroundColor,
+      surfaceColor: surfaceColor,
+      borderColor: borderColor,
+    );
+  }
+
+  // Dark theme
+  static ThemeData get dark {
+    return _baseTheme(
+      brightness: Brightness.dark,
+      primaryColor: darkPrimaryColor,
+      secondaryColor: darkSecondaryColor,
+      backgroundColor: darkBackgroundColor,
+      surfaceColor: darkSurfaceColor,
+      borderColor: darkBorderColor,
+    );
+  }
+
+  // Base theme generator
+  static ThemeData _baseTheme({
+    required Brightness brightness,
+    required Color primaryColor,
+    required Color secondaryColor,
+    required Color backgroundColor,
+    required Color surfaceColor,
+    required Color borderColor,
+  }) {
+    final isDark = brightness == Brightness.dark;
+
     return ThemeData(
       useMaterial3: true,
-      colorScheme: const ColorScheme.light(
+      brightness: brightness,
+      colorScheme: ColorScheme(
+        brightness: brightness,
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
         background: backgroundColor,
-        outline: borderColor,
+        error: Colors.red,
+        onPrimary: isDark ? darkSurfaceColor : surfaceColor,
+        onSecondary: isDark ? darkSurfaceColor : surfaceColor,
+        onSurface: primaryColor,
+        onBackground: primaryColor,
+        onError: surfaceColor,
       ),
       
-      // Typography
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
+      textTheme: TextTheme(
+        displayLarge: _baseHeadline.copyWith(
           fontSize: 34,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 0.25,
           color: primaryColor,
         ),
-        displayMedium: TextStyle(
+        displayMedium: _baseHeadline.copyWith(
           fontSize: 28,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 0.25,
           color: primaryColor,
         ),
-        titleLarge: TextStyle(
+        titleLarge: _baseHeadline.copyWith(
           fontSize: 22,
           fontWeight: FontWeight.w600,
-          letterSpacing: 0.15,
           color: primaryColor,
         ),
-        bodyLarge: TextStyle(
+        bodyLarge: _baseBody.copyWith(
           fontSize: 16,
-          letterSpacing: 0.5,
           color: primaryColor,
         ),
+      ).apply(
+        bodyColor: primaryColor,
+        displayColor: primaryColor,
       ),
 
-      // Components
       cardTheme: CardTheme(
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: borderColor),
+          side: BorderSide(color: borderColor),
         ),
         color: surfaceColor,
         margin: const EdgeInsets.symmetric(
@@ -61,21 +114,20 @@ class AppTheme {
         ),
       ),
 
-      // Input Decoration
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: surfaceColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: borderColor),
+          borderSide: BorderSide(color: borderColor),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: borderColor),
+          borderSide: BorderSide(color: borderColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: primaryColor, width: 2),
+          borderSide: BorderSide(color: primaryColor, width: 2),
         ),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -83,10 +135,9 @@ class AppTheme {
         ),
       ),
 
-      // Buttons
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: surfaceColor,
+          foregroundColor: isDark ? darkSurfaceColor : surfaceColor,
           backgroundColor: primaryColor,
           elevation: 0,
           padding: const EdgeInsets.symmetric(
@@ -104,13 +155,12 @@ class AppTheme {
         ),
       ),
 
-      // Navigation Bar
       navigationBarTheme: NavigationBarThemeData(
         backgroundColor: surfaceColor,
         indicatorColor: primaryColor.withOpacity(0.1),
         labelTextStyle: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
-            return const TextStyle(
+            return TextStyle(
               color: primaryColor,
               fontSize: 12,
               fontWeight: FontWeight.w500,
@@ -124,7 +174,7 @@ class AppTheme {
         }),
         iconTheme: MaterialStateProperty.resolveWith((states) {
           if (states.contains(MaterialState.selected)) {
-            return const IconThemeData(
+            return IconThemeData(
               color: primaryColor,
               size: 24,
             );
@@ -136,8 +186,7 @@ class AppTheme {
         }),
       ),
 
-      // App Bar
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: surfaceColor,
         foregroundColor: primaryColor,
         elevation: 0,

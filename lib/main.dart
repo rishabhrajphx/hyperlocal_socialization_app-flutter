@@ -8,6 +8,7 @@ import 'screens/venue_list_screen.dart';
 import 'screens/profile_screen.dart';
 import 'providers/event_provider.dart';
 import 'providers/venue_provider.dart';
+import 'config/theme.dart';
 
 
 void main() async {
@@ -30,27 +31,9 @@ class LocalEventsApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'Local Events',
-        theme: ThemeData(
-          primaryColor: Colors.black,
-          scaffoldBackgroundColor: Colors.grey[50],
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.white,
-            foregroundColor: Colors.black,
-            elevation: 0,
-            centerTitle: true,
-          ),
-          cardTheme: CardTheme(
-            elevation: 0,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15),
-              side: BorderSide(color: Colors.grey.withOpacity(0.2)),
-            ),
-          ),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            selectedItemColor: Colors.black,
-            unselectedItemColor: Colors.grey,
-          ),
-        ),
+        theme: AppTheme.light,
+        darkTheme: AppTheme.dark,
+        themeMode: ThemeMode.system,
         home: const MainNavigationScreen(),
       ),
     );
