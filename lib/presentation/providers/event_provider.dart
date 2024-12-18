@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import '../services/firebase_service.dart';
-import '../models/event.dart';
+import 'package:hyper_local_socialization_app/data/services/firebase_service.dart';
+import 'package:hyper_local_socialization_app/data/models/event.dart';
 
 class EventProvider with ChangeNotifier {
   final FirebaseService _firebaseService = FirebaseService();
