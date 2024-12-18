@@ -114,7 +114,7 @@ class EventCard extends StatelessWidget {
   }
 }
 
-class _QuickActionButton extends StatelessWidget {
+/*class _QuickActionButton extends StatelessWidget {
   final IconData icon;
   final String label;
   final VoidCallback onPressed;
@@ -145,7 +145,7 @@ class _QuickActionButton extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 /* Future Improvements:
  * 1. Animations:
  *    - Add hero transitions for images
