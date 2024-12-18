@@ -17,14 +17,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.18.1  # For date formatting
   firebase_core: ^2.32.0
-  cloud_firestore: ^4.14.0
-  firebase_auth: ^4.17.0  # Add this if you need authentication
-  firebase_storage: ^11.6.0  # Add this if you need storage
-  google_maps_flutter: ^2.5.3
-  google_maps_webservice: ^[version]
-  location: ^[version]
+  cloud_firestore: ^4.14.0 
+  #firebase_auth: ^4.17.0  # Add this if you need authentication
+  #firebase_storage: ^11.6.0  # Add this if you need storage
+  #google_maps_flutter: ^2.5.3
+  #google_maps_webservice: ^[version]
+  #location: ^[version]
 
   stripe_platform_interface: any
+  firebase_auth: ^4.15.3  # Use the latest version
 dev_dependencies:
   flutter_test:
     sdk: flutter

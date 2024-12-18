@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hyper_local_socialization_app/presentation/widgets//events/event_card.dart';
+import 'package:hyper_local_socialization_app/presentation/widgets/events/event_card.dart';
 import 'package:hyper_local_socialization_app/data/models/event.dart';
 import 'package:provider/provider.dart';
 import 'package:hyper_local_socialization_app/presentation/providers/event_provider.dart';
@@ -33,27 +33,17 @@ class HomeScreen extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                ),
-                // TODO: Implement location search functionality
-                // - Add autocomplete for cities and areas
-                // - Integrate with Google Places API
-                // - Save recent searches
+                ),// TODO: Implement location search functionality
               ),
               const SizedBox(height: 16),
               // Current location option
               ListTile(
                 leading: const Icon(Icons.my_location),
                 title: const Text('Use current location'),
-                onTap: () {
-                  // TODO: Implement current location detection
-                  // - Request location permissions
-                  // - Get current coordinates
-                  // - Reverse geocode to get address
-                  // - Update app state with new location
+                onTap: () { // TODO: Implement current location detection
                   Navigator.pop(context);
                 },
-              ),
-              // Recent locations
+              ),// Recent locations
               const Text(
                 'Recent Locations',
                 style: TextStyle(
@@ -63,11 +53,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Expanded(
                 child: ListView(
-                  children: [
-                    // TODO: Implement recent locations list
-                    // - Store recently selected locations in local storage
-                    // - Allow quick selection of previous locations
-                    // - Add option to remove locations from history
+                  children: [  // TODO: Implement recent locations list
                     ListTile(
                       leading: const Icon(Icons.history),
                       title: const Text('New York, NY'),
@@ -88,6 +74,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Trigger the fetchEvents when the widget builds
+    // To avoid multiple calls, consider moving this to a more appropriate lifecycle method
+    final eventProvider = Provider.of<EventProvider>(context, listen: false);
+    eventProvider.getEvents();
+
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
@@ -102,60 +93,81 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: StreamBuilder<List<Event>>(
-        stream: Provider.of<EventProvider>(context).getEvents(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          }
-          
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          }
+      body: Consumer<EventProvider>(
+        builder: (context, eventProvider, child) {
+          return FutureBuilder<List<Event>>(
+            future: eventProvider.getEvents(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                // Handle error state here
+                return Center(
+                  child: Text('Error: ${snapshot.error}'),
+                );
+              }
 
-          final events = snapshot.data ?? [];
-          
-          return CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Happening Near You',
-                        style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                              fontWeight: FontWeight.bold,
-                            ),
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+
+              final events = snapshot.data ?? [];
+
+              if (events.isEmpty) {
+                return const Center(
+                  child: Text('No events found in your area'),
+                );
+              }
+
+              return CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Happening Near You',
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'New York, NY',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyLarge
+                                ?.copyWith(
+                                  color: Colors.grey[600],
+                                ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'New York, NY',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.grey[600],
-                            ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) =>
+                            EventCard(event: events[index]),
+                        childCount: events.length,
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => EventCard(event: events[index]),
-                    childCount: events.length,
-                  ),
-                ),
-              ),
-            ],
+                ],
+              );
+            },
           );
         },
       ),
     );
   }
 }
+
 
 // TODO: Add location indicator banner
 // - Show current selected location
