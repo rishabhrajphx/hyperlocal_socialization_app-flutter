@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../widgets/event_card.dart';
-import '../models/event.dart';
+import 'package:hyper_local_socialization_app/presentation/widgets//events/event_card.dart';
+import 'package:hyper_local_socialization_app/data/models/event.dart';
 import 'package:provider/provider.dart';
-import '../providers/event_provider.dart';
+import 'package:hyper_local_socialization_app/presentation/providers/event_provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

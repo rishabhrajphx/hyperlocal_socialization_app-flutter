@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/event.dart';
+import 'package:hyper_local_socialization_app/data/models/event.dart';
 
 class EventDetailsScreen extends StatelessWidget {
   final Event event;

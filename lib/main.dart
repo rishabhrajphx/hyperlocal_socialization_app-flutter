@@ -50,19 +50,22 @@ class LocalEventsApp extends StatelessWidget {
 
         // Providers
         ChangeNotifierProvider<AuthProvider>(
-          create: (context) => AuthProvider(
-            userRepository: context.read<UserRepository>(),
-          ),
+          create: (context) {
+            final userRepository = context.read<UserRepository>();
+            return AuthProvider(userRepository: userRepository);
+          },
         ),
         ChangeNotifierProvider<EventProvider>(
-          create: (context) => EventProvider(
-            eventRepository: context.read<EventRepository>(),
-          ),
+          create: (context) {
+            final eventRepository = context.read<EventRepository>();
+            return EventProvider(eventRepository: eventRepository);
+          } 
         ),
         ChangeNotifierProvider<VenueProvider>(
-          create: (context) => VenueProvider(
-            venueRepository: context.read<VenueRepository>(),
-          ),
+          create: (context) {
+            final venueRepository = context.read<VenueRepository>();
+            return VenueProvider(venueRepository: venueRepository);
+          } 
         ),
       ],
       child: MaterialApp(

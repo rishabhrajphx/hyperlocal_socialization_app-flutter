@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/event.dart';
+import 'package:hyper_local_socialization_app/data/models/event.dart';
 import 'package:intl/intl.dart';
-import '../screens/event_details_screen.dart';
+import 'package:hyper_local_socialization_app/presentation/screens/events/event_details_screen.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
